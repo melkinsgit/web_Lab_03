@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="M%20Elkins%20Lab%2003%20Pt02%20Ess%20CSS.css" type="text/css" rel="stylesheet"/>
+    <title>Making Lists</title>
+</head>
+
+<!-- This code is based on Clara's in-class example we did adding a new element to a list.-->
+<body>
+    <ul id="myList">
+        <li>List item 1</li>
+        <li>Another list item</li>
+    </ul>
+
+    <form action="http://www.itemlist.com">
+        <p><span id="userInput">Enter a new list item:</span><input id="idNewItem" type="text" name="newItem" size="55"/></p>
+    </form>
+
+    <button onclick="validate()">Add an element to list</button>
+
+
+    <!-- Script that adds elments to list and outputs them to screen; this is based on Clara's in-class example-->
+    <script>
+
+        var newItems = 1;
+
+        function validate() {
+            var myListElement = document.getElementById("myList");
+
+            var myListText = document.getElementById("idNewItem").value;
+
+            if (myListText == ""){
+                alert("Please enter text to add as a list item.");
+                document.getElementById("idNewItem").focus();
+            }
+            else if (myListText.length > 50){
+                alert("Sorry, that list item is too long. Please limit your list item to 50 characters.");
+                document.getElementById("idNewItem").value = "";
+                document.getElementById("idNewItem").focus();
+            }
+            else {
+                var newListElement = document.createElement("li");
+                newListElement.innerHTML = myListText;
+                myListElement.appendChild(newListElement);
+                document.getElementById("idNewItem").value = "";
+                document.getElementById("idNewItem").focus();
+            }
+        }
+    </script>
+</body>
+</html>

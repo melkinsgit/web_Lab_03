@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+
+    <!-- Include Bootstrap. This downloads Bootstrap from a CDN. You can
+     also host Bootstrap on your server, but it's usually faster for the
+     user for their browser to fetch it from a CDN. -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link type="text/css" rel="stylesheet" href="M%20Elkins%20Lab%2003%20Pt04%20Ess%20CSS.css">
+    <title>Create Your Color</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1 id="colorPickerTitle">Color Picker</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <p>What this color looks like as a background:</p>
+        </div>
+
+        <div class="col-sm-3">
+            <p>What this color looks like as text:</p>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <p id="boxOfColor"></p>
+        </div>
+        <div class="col-sm-3">
+            <p id="textOfColor">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <button onclick="pickARandomColor()">Get A New Color</button>
+        </div>
+
+        <div class="col-sm-3">
+            <button onclick="saveThisColor()">Save This Color</button>
+        </div>
+    </div>
+
+    <!-- has to be redone as table and has to be hex not rgb -->
+    <div id="mySavedColors">
+        <p></p>
+        <p>My Saved Colors:</p>
+    </div>
+
+</div>
+
+<script>
+
+    // the following 2 functions are from Clara's week 3 examples
+
+    function pickARandomColor() {
+
+        var newColor = randomColor();
+        var box = document.getElementById("boxOfColor");
+        box.style.backgroundColor = newColor;
+        var graph = document.getElementById("textOfColor");
+        graph.style.color = newColor;
+
+    }
+
+    function randomColor() {
+
+        var r = Math.floor(Math.random() * 255);   //Pick a random number between 0 and 1
+        var g = Math.floor(Math.random() * 255);   //Multiply by 255 to get a number in the correct range
+        var b = Math.floor(Math.random() * 255);   //Then convert it to an int
+
+        //Colors can be created as "rgb(33, 52, 15)" where the numbers are R, G, B values.
+        //This is expected as a string.
+
+        var colorString = "rgb(" + r + ", " + g + ", " + b + ")";
+
+//        console.log(colorString);   //Avoid for production apps, OK for developing.
+        // You can see the output from this in the developer JavaScript console.
+
+        return colorString;
+
+    }
+
+    function saveThisColor() {
+
+        var saveColor = document.getElementById("boxOfColor").style.backgroundColor;  // get the color in the paragraph box
+
+        var colorList = document.getElementById("mySavedColors");  // get the div of saved colors, we'll be adding to this node
+
+        // add a row
+        // add a column - put the color in there
+        // add a column - put the hex value in there
+
+        var newPElement = document.createElement("p");
+
+        newPElement.style.width = "100px";
+        newPElement.style.height = "20px";
+        newPElement.style.backgroundColor = saveColor;  // put the value of color in the box, into value of the color in the input box
+
+        colorList.appendChild(newPElement);  // add the input box with color to the list of saved colors
+
+        newPElement = document.createElement("p");
+        newPElement.innerHTML = "This color is " + saveColor + ".";
+
+        colorList.appendChild(newPElement);
+    }
+
+</script>
+</body>
+</html>

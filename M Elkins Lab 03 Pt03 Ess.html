@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+
+    <!-- Include Bootstrap. This downloads Bootstrap from a CDN. You can
+     also host Bootstrap on your server, but it's usually faster for the
+     user for their browser to fetch it from a CDN. -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- The stylesheet I have created -->
+    <link rel="stylesheet" type="text/css" href="M%20Elkins%20Lab%2002%20Favorites%20CSS.css">
+    <!--<title>Color Saver</title>-->
+</head>
+<body>
+
+<!-- I based this on the code I wrote for Lab 02 Favorite Things -->
+<div class="container-fluid">
+
+    <!-- jumbotron -->
+    <div class="jumbotron">
+        <h1 id="movieRateTitle">Mega Movie Ratings</h1>
+    </div>
+    <!-- end jumbotron -->
+
+    <!-- rows of content; all h2s with star as class will have text inner HTML replaced with string of appropriate number of 0stars -->
+    <div class="row">
+        <div class="col-sm-4 starWars">
+            <h2>Star War<br/><span class="stars">3 star</span></h2>
+        </div>
+        <!-- end first column -->
+
+        <div class="col-sm-4 allThatJazz">
+            <h2>All That Jazz<br/><span class="stars">5 star</span></h2>
+        </div>
+        <!-- end second column -->
+
+        <div class="col-sm-4 priscillaDesert">
+            <h2>Priscilla Queen of the Desert<br/><span class="stars">5 star</span></h2>
+        </div>
+        <!-- end third column -->
+    </div>
+    <!-- end row1 -->
+
+    <div class="row">
+        <div class="col-sm-4 bigLebowski">
+            <h2>The Big Lebowski<br/><span class="stars">4 star</span></h2>
+        </div>
+        <!-- end first column -->
+
+        <div class="col-sm-4 carefulHearYou">
+            <h2>Careful, They Might Hear You<br/><span class="stars">3 star</span></h2>
+        </div>
+        <!-- end second column -->
+
+        <div class="col-sm-4 Ishtar">
+            <h2>Ishtar<br/><span class="stars">1 star</span></h2>
+        </div>
+        <!-- end third column -->
+    </div>
+    <!-- end row2 -->
+
+    <!-- script that puts all elements in an array by class, then for all the elements in that array, if the class is "stars", creates a row of stars to replace the inner HTML in those classes above -->
+    <script>
+
+        var allStars = document.getElementsByClassName("stars");
+        var newMessage = "hello";
+
+
+        for (var i in allStars) {
+            if (allStars[i].className == "stars") {
+
+                var starWord = allStars[i].innerHTML;
+                var counter = starWord.charAt(0);
+
+                var classStr = allStars[i].className;
+                var innerStr = "";
+                var star = '\u2605';
+
+                for (var j = 0; j < counter; j++){
+                    innerStr = innerStr + star;
+                }
+                allStars[i].innerHTML = innerStr;
+            }
+        }
+
+    </script>
+
+</div>
+</body>
+</html>

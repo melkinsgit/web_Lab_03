@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How Big is My Screen?</title>
+</head>
+<body>
+    <h1>The total number of pixels is:</h1>
+    <h1 id="pixels">Nothing yet</h1>
+
+    <script>
+
+        document.getElementById("pixels").innerHTML = 'hello world!';
+
+        window.addEventListener("resize", tellSize);
+
+        function tellSize(){
+
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+
+            var results = w * h;
+            results = 'The screen is ' + w + ' wide, ' + h + ' high and there are ' + results + ' pixels showing.'
+
+            document.getElementById("pixels").innerHTML = results;
+        }
+
+    </script>
+</body>
+</html>
