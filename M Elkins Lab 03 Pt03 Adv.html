@@ -11,12 +11,13 @@
 
 <!-- This code is based on Clara's in-class example we did adding a new element to a list.-->
 <body>
+<p>You may add an item to this list by entering text in the box indicated below. In order to prevent inadvertent execution of html commands, you will not be able to enter any of the following characters:<span style="color: red"><strong>  < > ' " & </strong></span> . Try it.</p>
 <ul id="myList">
     <li>List item 1</li>
     <li>Another list item</li>
 </ul>
 
-<form action="http://www.itemlist.com">
+<form action="http://www.itemList.com">
     <p><span id="userInput">Enter a new list item:</span><input id="idNewItem" type="text" name="newItem" size="55"/></p>
 </form>
 
@@ -50,24 +51,60 @@
             document.getElementById("idNewItem").focus();
         }
     }
-
+    // created this myself from material in the Eloquent Javacript book - it flagged all the keys I wanted not to allow my users to enter
+    // from below I figured out I can't have shift 188, shift 190, shift 55, shift 222, 222
+    /* _____________________________________________________________________________________
     document.getElementById("idNewItem").addEventListener("keydown", function (event) {
-        if (event.keyCode == );
+        if ((event.keyCode == 222 || event.keyCode == 188 || event.keyCode == 190 || event.keyCode == 55) && event.shiftKey){
+            console.log("this key is no good" + event.keyCode);
+        }
+        if (event.keyCode == 222){
+            console.log("this key is no good" + event.keyCode);
+        }
+    });
+    _____________________________________________________________________________________*/
+
+
+
+    // then I got the content below from: http: stackoverflow.com/questions/1639338/why-does-returning-false-in-they-keydown-callback-does-not-stop-the-button-click
+    /* ____________________________________________________________________________________
+    var button = document.getElementById("button");
+    button.onkeypress = function(evt) {
+        evt = evt || window.event;
+        var charCode = evt.keyCode || evt.which;
+        if (charCode == 32) {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            } else {
+                evt.returnValue = false;
+            }
+        }
+    };
+    ____________________________________________________________________________________*/
+
+    // then I wrote this using information from the previous two segments of commented code, and this worked
+
+    // get the object that is the input box with id idNewItem
+    var newItem = document.getElementById("idNewItem");
+
+    // add an event listener to it such that when the listener "hears" a key down, it executes a function that takes as a parameter the event
+    newItem.addEventListener("keydown",function (event) {
+        event = event || window.event;  // and the event is the event that came via the paramater or something that happened in the window?
+
+        // if the key code of the event is < or >, or if it is ' or 7 with and shift (" or &)
+        if ((event.keyCode == 188 || event.keyCode == 190 ) || ((event.keyCode == 222 || event.keyCode == 55) && event.shiftKey)){
+
+            // prevent the key pressed from being treated as a key down and output to the input box and alert the user
+            event.returnValue = false;
+            console.log("this key is no good" + event.keyCode);  // for debugging
+        }
+        // same logic as above, except it prevents ' from being output
+        if (event.keyCode == 222){
+            event.returnValue = false;
+            console.log("this key is no good" + event.keyCode);  // for debugging
+        }
     });
 
-    // can't have shift 188, shift 190, shift 55, shift 222, 222
-
-//    function goodKey (keyInput) {
-//        console.log(keyInput.keyCode);
-//    }
-
-//        input.onkeypress = function(e) {
-//            e = e || event;
-//            var chr = getChar(e);
-//
-//            if (!isNumeric(chr) && chr !== null) {
-//                return false
-//            }
 </script>
 </body>
 </html>
