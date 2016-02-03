@@ -1,10 +1,73 @@
 <!DOCTYPE html>
+
+<!-- Based on the fact that entering something like this: <p>A New Paragraph - a block!</p> creates problems for adding elements to a list, we're going to limit the type of characters that can be input to the Lab 03 Pt02 Ess page. New code as noted below. -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link href="M%20Elkins%20Lab%2003%20Pt02%20Ess%20CSS.css" type="text/css" rel="stylesheet"/>
+    <title>Making Lists</title>
 </head>
-<body>
 
+<!-- This code is based on Clara's in-class example we did adding a new element to a list.-->
+<body>
+<ul id="myList">
+    <li>List item 1</li>
+    <li>Another list item</li>
+</ul>
+
+<form action="http://www.itemlist.com">
+    <p><span id="userInput">Enter a new list item:</span><input id="idNewItem" type="text" name="newItem" size="55"/></p>
+</form>
+
+<button onclick="validate()">Add an element to list</button>
+
+
+<!-- Script that adds elements to list and outputs them to screen; this is based on Clara's in-class example-->
+<script>
+
+    var newItems = 1;
+
+    function validate() {
+        var myListElement = document.getElementById("myList");
+
+        var myListText = document.getElementById("idNewItem").value;
+
+        if (myListText == "") {
+            alert("Please enter text to add as a list item.");
+            document.getElementById("idNewItem").focus();
+        }
+        else if (myListText.length > 50) {
+            alert("Sorry, that list item is too long. Please limit your list item to 50 characters.");
+            document.getElementById("idNewItem").value = "";
+            document.getElementById("idNewItem").focus();
+        }
+        else {
+            var newListElement = document.createElement("li");
+            newListElement.innerHTML = myListText;
+            myListElement.appendChild(newListElement);
+            document.getElementById("idNewItem").value = "";
+            document.getElementById("idNewItem").focus();
+        }
+    }
+
+    document.getElementById("idNewItem").addEventListener("keydown", function (event) {
+        if (event.keyCode == );
+    });
+
+    // can't have shift 188, shift 190, shift 55, shift 222, 222
+
+//    function goodKey (keyInput) {
+//        console.log(keyInput.keyCode);
+//    }
+
+//        input.onkeypress = function(e) {
+//            e = e || event;
+//            var chr = getChar(e);
+//
+//            if (!isNumeric(chr) && chr !== null) {
+//                return false
+//            }
+</script>
 </body>
 </html>
